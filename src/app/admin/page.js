@@ -84,7 +84,7 @@ export default function AdminPage() {
     <div className="login-wrap" style={{ background: 'var(--paper)', position: 'relative', zIndex: 1 }}>
       <div className="login-box">
         <div className="login-title">ADMIN</div>
-        <div className="login-sub">loudmouth</div>
+        <div className="login-sub">butterflyweed</div>
         <form onSubmit={handleLogin}>
           <div className="admin-field">
             <label className="admin-label">Password</label>
@@ -109,7 +109,7 @@ export default function AdminPage() {
       <div className="admin-header">
         New Post
         <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 12, letterSpacing: 2, color: 'var(--muted)', marginLeft: 20, fontWeight: 400 }}>
-          LOUDMOUTH ADMIN
+          BUTTERFLYWEED ADMIN
         </span>
       </div>
 

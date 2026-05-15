@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 
 export const metadata = {
-  title: 'LOUDMOUTH',
+  title: 'BUTTERFLYWEED',
   description: 'poems · thoughts · rants · films',
 }
 

@@ -14,7 +14,7 @@ export default function SiteHeader() {
         <div className="header-top">
           <div>
             <Link href="/" style={{ textDecoration: 'none' }}>
-              <div className="masthead">LOUDMOUTH</div>
+              <div className="masthead">BUTTERFLYWEED</div>
             </Link>
             <div className="masthead-sub">poems · thoughts · rants · films</div>
           </div>
@@ -22,7 +22,7 @@ export default function SiteHeader() {
             <strong>Vol. 1</strong>
             EST. {year}<br />
             ACCRA, GH<br />
-            FREE ALWAYS
+            CAMEL.LION.CHILD
           </div>
         </div>
       </header>
