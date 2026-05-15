@@ -1,7 +1,7 @@
 ---
 title: "Maame Water"
 date: "2026-05-15"
-type: "Poem"
+type: "poetry"
 excerpt: "Only people Drunk on love and death and"
 pullquote: " She asks whether she would make a good sculptor. She'd make a good anything.."
 ---
