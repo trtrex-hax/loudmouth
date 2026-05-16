@@ -2,7 +2,13 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-const TYPES = ['All', 'Poetry', 'Thoughts', 'Rants', 'Video']
+const TYPES = [
+  { label: 'All', value: null },
+  { label: 'Poetry', value: 'poetry' },
+  { label: 'Thoughts', value: 'thought' },
+  { label: 'Rants', value: 'rant' },
+  { label: 'Video', value: 'video' },
+]
 
 export default function SiteHeader() {
   const path = usePathname()
@@ -27,12 +33,12 @@ export default function SiteHeader() {
         </div>
       </header>
       <nav className="site-nav">
-        {TYPES.map(t => {
-          const href = t === 'All' ? '/blog' : `/blog?type=${t.toLowerCase()}`
-          const isActive = path === '/blog' && t === 'All'
+        {TYPES.map(({ label, value }) => {
+          const href = value ? `/blog?type=${value}` : '/blog'
+          const isActive = path === '/blog' && !value
           return (
-            <Link key={t} href={href} className={isActive ? 'active' : ''}>
-              {t}
+            <Link key={label} href={href} className={isActive ? 'active' : ''}>
+              {label}
             </Link>
           )
         })}
