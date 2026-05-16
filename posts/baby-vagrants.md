@@ -2,7 +2,7 @@
 title: "Baby Vagrants "
 date: "2026-05-15"
 type: "poetry"
-excerpt: " "(About babies who are neither male or female but... And wear their shoes backwards and pee and run to their parents without shame.)""
+excerpt: " (About babies who are neither male or female but... And wear their shoes backwards and pee and run to their parents without shame.)"
 pullquote: "march through the years like hope was  the same as their grandma's groundnut soup."
 ---
 
