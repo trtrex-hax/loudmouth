@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import SiteHeader from '../components/SiteHeader'
 import { getAllPosts } from '../lib/posts'
+import { getAbout } from '../lib/about'
 
 function TypeBadge({ type }) {
   const icons = { poetry: '✦', thought: '◈', rant: '▲', video: '▶' }
@@ -17,10 +18,20 @@ function formatDate(d) {
   })
 }
 
+function getDailyHero(posts) {
+  if (!posts.length) return null
+  const day = Math.floor(Date.now() / 86400000)
+  return posts[day % posts.length]
+}
+
 export default function HomePage() {
-  const posts = getAllPosts()
-  const [hero, ...rest] = posts
+  const allPosts = getAllPosts()
+  const about = getAbout()
+
+  const hero = getDailyHero(allPosts)
+  const rest = allPosts.filter(p => p.slug !== hero?.slug)
   const recent = rest.slice(0, 9)
+  const recentPoems = allPosts.filter(p => p.type === 'poetry').slice(0, 5)
 
   return (
     <div className="site-wrap">
@@ -61,6 +72,31 @@ export default function HomePage() {
             </div>
           </Link>
         ))}
+      </div>
+
+      <div className="bottom-strip">
+        <div className="strip-recent">
+          <div className="strip-label">Recent poems</div>
+          <ul className="recent-list">
+            {recentPoems.length === 0 && (
+              <li style={{ fontStyle: 'italic', color: 'var(--muted)', fontSize: 13 }}>No poems yet.</li>
+            )}
+            {recentPoems.map(p => (
+              <li key={p.slug}>
+                <Link href={`/p/${p.slug}`} style={{ textDecoration: 'none' }}>
+                  <span className="recent-title">{p.title}</span>
+                </Link>
+                <span className="recent-meta">{formatDate(p.date)}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="strip-about">
+          <div className="strip-label">Who is this</div>
+          <p className="about-text">{about || 'A person writing through things.'}</p>
+          <div className="about-sig">Jedidiah.</div>
+        </div>
       </div>
     </div>
   )

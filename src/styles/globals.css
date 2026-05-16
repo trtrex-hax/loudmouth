@@ -387,6 +387,84 @@ a:hover { text-decoration: underline; }
   line-height: 1.5;
 }
 
+/* ── BOTTOM STRIP ── */
+.bottom-strip {
+  grid-column: 1 / -1;
+  border-top: 3px solid var(--ink);
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 0;
+  margin-top: 0;
+}
+
+.strip-recent {
+  padding: 20px 24px 20px 0;
+  border-right: 1.5px solid var(--ink);
+}
+
+.strip-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--stain);
+}
+
+.recent-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.recent-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 13px;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px dotted var(--stain);
+}
+
+.recent-list li:last-child { border-bottom: none; }
+
+.recent-title {
+  font-style: italic;
+  color: var(--ink);
+}
+
+.recent-title:hover { text-decoration: underline; }
+
+.recent-meta {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  color: var(--stain);
+  white-space: nowrap;
+}
+
+.strip-about {
+  padding: 20px 0 20px 24px;
+}
+
+.about-text {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.about-sig {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: var(--ink);
+  margin-top: 10px;
+  letter-spacing: 1px;
+}
+
 /* ── ADMIN ── */
 .admin-wrap {
   max-width: 900px;
