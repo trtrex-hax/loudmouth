@@ -25,9 +25,14 @@ export async function getPostBySlug(slug) {
   if (!fs.existsSync(filepath)) return null
   const raw = fs.readFileSync(filepath, 'utf8')
   const { data, content } = matter(raw)
+
+  if (data.type === 'poetry') {
+    return { slug, ...data, content, raw: true }
+  }
+
   const processed = await remark()
     .use(remarkBreaks)
     .use(remarkHtml, { sanitize: false })
     .process(content)
-  return { slug, ...data, content: processed.toString() }
+  return { slug, ...data, content: processed.toString(), raw: false }
 }

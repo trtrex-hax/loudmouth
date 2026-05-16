@@ -20,14 +20,13 @@ function formatDate(d) {
 export default function HomePage() {
   const posts = getAllPosts()
   const [hero, ...rest] = posts
-  const recent = rest.slice(0, 4)
+  const recent = rest.slice(0, 9)
 
   return (
     <div className="site-wrap">
       <SiteHeader />
 
       <div className="post-grid">
-        {/* HERO */}
         {hero && (
           <Link href={`/p/${hero.slug}`} style={{ textDecoration: 'none', gridColumn: '1/-1' }}>
             <div className="hero-card">
@@ -52,7 +51,6 @@ export default function HomePage() {
           </Link>
         )}
 
-        {/* GRID CARDS */}
         {recent.map(post => (
           <Link key={post.slug} href={`/p/${post.slug}`} style={{ textDecoration: 'none' }}>
             <div className="post-card">

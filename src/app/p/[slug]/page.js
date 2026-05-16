@@ -19,7 +19,6 @@ export default async function PostPage({ params }) {
   if (!post) notFound()
 
   const isPoetry = post.type === 'poetry'
-  const bodyClass = `post-body ${isPoetry ? 'poetry' : 'prose'}`
 
   return (
     <div className="site-wrap">
@@ -35,10 +34,10 @@ export default async function PostPage({ params }) {
           <div className="post-meta">{formatDate(post.date)}</div>
         </div>
 
-        <div
-          className={bodyClass}
-          dangerouslySetInnerHTML={{ __html: post.content }}
-        />
+        {isPoetry
+          ? <pre className="post-body poetry">{post.content.trim()}</pre>
+          : <div className="post-body prose" dangerouslySetInnerHTML={{ __html: post.content }} />
+        }
       </article>
     </div>
   )

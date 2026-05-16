@@ -302,9 +302,16 @@ a:hover { text-decoration: underline; }
 
 /* Poetry: preserve whitespace exactly */
 .post-body.poetry {
+  font-family: 'Newsreader', Georgia, serif;
   font-size: 18px;
-  line-height: 1.85;
-  white-space: pre-wrap;
+  line-height: 1.55;
+  white-space: pre;
+  overflow-x: auto;
+  max-width: 620px;
+  margin: 0 auto;
+  background: none;
+  border: none;
+  padding: 0;
 }
 
 .post-body.poetry p {
