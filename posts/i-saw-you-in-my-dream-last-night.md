@@ -2,6 +2,8 @@
 title: "I saw you in my dream last night"
 date: "2026-05-20"
 type: "poetry"
+excerpt: "6 years could be yesternights phantom"
+pullquote: "Maybe you'll wear that ponytail again; I'll never forget that ponytail."
 ---
 
 I saw you in my dream last night
