@@ -1,7 +1,7 @@
 ---
 title: "Why I like J. Cole"
 date: "2026-05-26"
-type: "thought"
+type: "thoughts"
 excerpt: "And why he is similar to Noah Kahan(And Kubolor too!)"
 pullquote: "The issue is, we live in a world that is built around quantifying spectrums"
 ---
