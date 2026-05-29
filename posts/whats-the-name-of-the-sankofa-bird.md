@@ -1,11 +1,10 @@
 ---
-title: "What's the name of the Sankofa bird?"
-date: "2025-09-07"
+title: "What's the name of the Sankofa bird"
+date: "2025-07-09"
 type: "poetry"
 excerpt: "Ancestors Answer Me, New Voices Poetry Contest Entry"
 pullquote: "Out of her belly gushes a twisted child"
 ---
-
 
 "Traditional songs? I don't know. Come with me by Osibisa." ~~Mother.
 
