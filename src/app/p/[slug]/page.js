@@ -3,10 +3,7 @@ import { notFound } from 'next/navigation'
 import SiteHeader from '../../../components/SiteHeader'
 import { getPostBySlug, getAllPosts } from '../../../lib/posts'
 
-export async function generateStaticParams() {
-  const posts = getAllPosts()
-  return posts.map(p => ({ slug: p.slug }))
-}
+export const dynamic = 'force-dynamic'
 
 function formatDate(d) {
   return new Date(d).toLocaleDateString('en-GB', {
