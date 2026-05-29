@@ -1,5 +1,5 @@
 ---
-title: ""What's the name of the Sankofa bird?""
+title: "What's the name of the Sankofa bird?"
 date: "2025-09-07"
 type: "poetry"
 excerpt: "Ancestors Answer Me, New Voices Poetry Contest Entry"
