@@ -1,7 +1,7 @@
 ---
 title: "We Must All Be Queer."
 date: "2026-05-29"
-type: "thoughts"
+type: "thought"
 excerpt: "A matter of philosophical, principled, and anthropological study. (Nature, Nurture, Bioessentialism, etc.)"
 pullquote: "Philosophy and lived experience aren't exactly the same thing."
 ---
