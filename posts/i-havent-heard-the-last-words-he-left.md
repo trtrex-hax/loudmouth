@@ -1,6 +1,6 @@
 ---
 title: "I haven't heard the last words he left."
-date: "2026-01-30"
+date: "2025-07-31"
 type: "poetry"
 excerpt: "Why do i write about him?"
 pullquote: "I am alone in the center."
