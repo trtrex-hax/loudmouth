@@ -1,7 +1,7 @@
 ---
 title: "AI is actually meant to be used"
 date: "2026-07-03"
-type: "thought"
+type: "rant"
 excerpt: "I use AI quite a bit, honestly and unfortunately"
 pullquote: "Do you think it is wrong, to enter a competition and ask your mate to tighten a bolt?"
 ---
