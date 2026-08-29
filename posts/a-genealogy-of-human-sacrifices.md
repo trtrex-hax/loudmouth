@@ -1,6 +1,6 @@
 ---
 title: "A genealogy of human sacrifices"
-date: "2026-08-29"
+date: "2026-06-29"
 type: "poetry"
 excerpt: "The patriarchy means every woman is a road to be walked"
 pullquote: "Even good things in excess are bad What about women in excess?"
