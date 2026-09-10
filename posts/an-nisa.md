@@ -2,7 +2,7 @@
 title: "An Nisa"
 date: "2026-09-10"
 type: "poetry"
-excerpt: "Dzidzor had a phase, lol."
+excerpt: "Sada had a phase, lol."
 pullquote: "strike me, lord and don't do it lightly "
 ---
 
@@ -28,5 +28,5 @@ something about suffering .
 it feels religious if done right
 
 
-~~~ Dzidzor ~~~
+~~~ Sada ~~~
 added 09/10/26
