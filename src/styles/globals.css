@@ -24,6 +24,7 @@ body {
   font-family: 'Newsreader', Georgia, serif;
   min-height: 100vh;
   position: relative;
+  overflow-wrap: anywhere;
 }
 
 img, video { max-width: 100%; height: auto; }
@@ -69,9 +70,11 @@ a:hover { text-decoration: underline; }
   flex-wrap: wrap;
 }
 
+.header-top > * { min-width: 0; }
+
 .masthead {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(60px, 11vw, 108px);
+  font-size: clamp(38px, 11vw, 108px);
   letter-spacing: 2px;
   line-height: 0.92;
   color: var(--ink);
