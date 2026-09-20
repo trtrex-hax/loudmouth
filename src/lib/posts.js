@@ -4,6 +4,7 @@ import matter from 'gray-matter'
 import { remark } from 'remark'
 import remarkHtml from 'remark-html'
 import remarkBreaks from 'remark-breaks'
+import remarkGfm from 'remark-gfm'
 
 const postsDir = path.join(process.cwd(), 'posts')
 
@@ -31,6 +32,7 @@ export async function getPostBySlug(slug) {
   }
 
   const processed = await remark()
+    .use(remarkGfm)
     .use(remarkBreaks)
     .use(remarkHtml, { sanitize: false })
     .process(content)

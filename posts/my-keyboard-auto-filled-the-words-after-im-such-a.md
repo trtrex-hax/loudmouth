@@ -1,5 +1,5 @@
 ---
-title: "my keyboard auto filled the words after "i'm such a""
+title: "my keyboard auto filled the words after \"i'm such a\""
 date: "2026-09-13"
 type: "poetry"
 excerpt: "It's sad when you think about it."

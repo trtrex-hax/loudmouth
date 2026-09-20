@@ -1,5 +1,6 @@
 'use client'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { htmlToMarkdown, markdownToHtml } from '../../lib/richText'
 
 function slugify(str) {
   return str
@@ -9,25 +10,27 @@ function slugify(str) {
     .replace(/\s+/g, '-')
 }
 
+function yamlEscape(str) {
+  return String(str).replace(/\\/g, '\\\\').replace(/"/g, '\\"')
+}
+
 function buildFrontmatter({ title, date, type, excerpt, pullquote }) {
   const lines = [
-    `title: "${title}"`,
+    `title: "${yamlEscape(title)}"`,
     `date: "${date}"`,
     `type: "${type}"`,
   ]
-  if (excerpt) lines.push(`excerpt: "${excerpt}"`)
-  if (pullquote) lines.push(`pullquote: "${pullquote}"`)
+  if (excerpt) lines.push(`excerpt: "${yamlEscape(excerpt)}"`)
+  if (pullquote) lines.push(`pullquote: "${yamlEscape(pullquote)}"`)
   return lines.join('\n')
 }
 
 function PreviewBody({ type, body }) {
   if (!body) return <p style={{ color: 'var(--muted)', fontStyle: 'italic' }}>Your post will appear here...</p>
   if (type === 'poetry') {
-    return <pre style={{ fontFamily: "'Newsreader', Georgia, serif", fontSize: 17, lineHeight: 1.85, whiteSpace: 'pre-wrap', color: 'var(--ink)' }}>{body}</pre>
+    return <pre className="post-body poetry" style={{ margin: 0 }}>{body.trim()}</pre>
   }
-  return body.split('\n\n').map((para, i) => (
-    <p key={i} style={{ fontSize: 16, lineHeight: 1.8, marginBottom: '1.2em', color: 'var(--ink)' }}>{para}</p>
-  ))
+  return <div className="post-body prose" style={{ margin: 0 }} dangerouslySetInnerHTML={{ __html: markdownToHtml(body) }} />
 }
 
 export default function AdminPage() {
@@ -46,6 +49,18 @@ export default function AdminPage() {
   const [status, setStatus] = useState(null) // null | 'loading' | 'ok' | 'err'
   const [statusMsg, setStatusMsg] = useState('')
   const [tab, setTab] = useState('write') // 'write' | 'preview'
+  const [importing, setImporting] = useState(false)
+
+  const textareaRef = useRef(null)
+  const fileInputRef = useRef(null)
+
+  // Auto-grow the textarea so a pasted/imported document isn't stuck in a tiny scroll box
+  useEffect(() => {
+    const el = textareaRef.current
+    if (!el || tab !== 'write') return
+    el.style.height = 'auto'
+    el.style.height = `${Math.min(el.scrollHeight, window.innerHeight * 0.8)}px`
+  }, [body, tab])
 
   function handleLogin(e) {
     e.preventDefault()
@@ -77,6 +92,60 @@ export default function AdminPage() {
       }
     } catch (e) {
       setStatus('err'); setStatusMsg('Network error.')
+    }
+  }
+
+  // Word/Google Docs/browser copies put a rich HTML version on the clipboard alongside
+  // plain text. For prose types, convert that HTML to Markdown so bold/italic/headings/
+  // lists survive the paste instead of landing as flat text. Poetry keeps the browser's
+  // default plain-text paste so exact spacing/indentation is preserved untouched.
+  function handleBodyPaste(e) {
+    if (type === 'poetry') return
+    const html = e.clipboardData?.getData('text/html')
+    if (!html) return
+    e.preventDefault()
+    const markdown = htmlToMarkdown(html)
+    const el = e.target
+    const start = el.selectionStart
+    const end = el.selectionEnd
+    const next = body.slice(0, start) + markdown + body.slice(end)
+    setBody(next)
+    requestAnimationFrame(() => {
+      const pos = start + markdown.length
+      el.setSelectionRange(pos, pos)
+      el.focus()
+    })
+  }
+
+  async function handleFileImport(e) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    setImporting(true)
+    try {
+      const name = file.name.toLowerCase()
+      let markdown
+      if (name.endsWith('.docx')) {
+        const mammoth = (await import('mammoth')).default
+        const arrayBuffer = await file.arrayBuffer()
+        const { value: html } = await mammoth.convertToHtml({ arrayBuffer })
+        markdown = htmlToMarkdown(html)
+      } else if (name.endsWith('.html') || name.endsWith('.htm')) {
+        markdown = htmlToMarkdown(await file.text())
+      } else {
+        // .txt / .md — already plain text or markdown
+        markdown = (await file.text()).trim()
+      }
+      setBody(prev => (prev ? `${prev}\n\n${markdown}` : markdown))
+      if (!title) {
+        const guessed = file.name.replace(/\.(docx|html?|txt|md)$/i, '').replace(/[-_]+/g, ' ').trim()
+        if (guessed) setTitle(guessed)
+      }
+      setStatus(null)
+    } catch (err) {
+      setStatus('err'); setStatusMsg('Could not read that file — try pasting the content directly instead.')
+    } finally {
+      setImporting(false)
+      e.target.value = ''
     }
   }
 
@@ -176,13 +245,35 @@ export default function AdminPage() {
 
       {tab === 'write' ? (
         <div className="admin-field" style={{ marginTop: 0 }}>
+          <div className="admin-toolbar">
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".docx,.html,.htm,.txt,.md"
+              onChange={handleFileImport}
+              style={{ display: 'none' }}
+            />
+            <button
+              type="button"
+              className="admin-import-btn"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={importing}
+            >
+              {importing ? 'Importing…' : 'Import document (.docx, .html, .txt, .md)'}
+            </button>
+            {type !== 'poetry' && (
+              <span className="admin-hint">Pasting from Word or Google Docs keeps bold/italic/headings/lists — converted to Markdown automatically.</span>
+            )}
+          </div>
           <textarea
-            className="admin-textarea"
+            ref={textareaRef}
+            className={`admin-textarea${type === 'poetry' ? ' raw' : ''}`}
             value={body}
             onChange={e => setBody(e.target.value)}
+            onPaste={handleBodyPaste}
             placeholder={type === 'poetry'
               ? "Write your poem here.\n\nSpacing and line breaks are preserved exactly as you type them.\n\n        indent like this\nbreak\n    wherever\n          you want."
-              : "Write your post here.\n\nDouble line break = new paragraph."
+              : "Write your post here.\n\nDouble line break = new paragraph.\n\nPaste from a Word/Google doc, or import a file above, and the formatting becomes Markdown automatically."
             }
             spellCheck={false}
           />
