@@ -31,6 +31,10 @@ export default async function PostPage({ params }) {
           <div className="post-meta">{formatDate(post.date)}</div>
         </div>
 
+        {isPoetry && (
+          <p className="poetry-note">This poem is laid out with exact line breaks — it reads best on a larger screen or laptop. On a phone, long lines wrap to fit.</p>
+        )}
+
         {isPoetry
           ? <pre className="post-body poetry">{post.content.trim()}</pre>
           : <div className="post-body prose" dangerouslySetInnerHTML={{ __html: post.content }} />

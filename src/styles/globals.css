@@ -326,6 +326,20 @@ a:hover { text-decoration: underline; }
   white-space: pre-wrap;
 }
 
+.poetry-note {
+  display: none;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+  font-style: italic;
+  color: var(--muted);
+  background: var(--cream);
+  border: 1px dashed var(--stain);
+  padding: 12px 16px;
+  margin-bottom: 24px;
+}
+
 /* Prose: normal flow */
 .post-body.prose p {
   font-size: 17px;
@@ -774,6 +788,16 @@ a:hover { text-decoration: underline; }
 
   .admin-header { font-size: 28px; }
   .admin-header span { display: block; margin-left: 0 !important; margin-top: 6px; }
+
+  /* Poems are hand-laid-out with exact line breaks for a full screen — on a phone,
+     wrap long lines instead of forcing horizontal scroll to read them. */
+  .post-body.poetry {
+    white-space: pre-wrap;
+    overflow-x: hidden;
+    word-break: break-word;
+  }
+
+  .poetry-note { display: block; }
 }
 
 /* Small phone */
